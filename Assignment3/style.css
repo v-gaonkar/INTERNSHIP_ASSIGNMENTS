@@ -1,0 +1,568 @@
+footer .footer-body {
+  padding: 0 90px;
+}
+footer .title {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 3;
+}
+footer .line-space {
+  line-height: 2;
+}
+footer img {
+  margin-right: 12px;
+  height: 40px;
+  width: 40px;
+}
+footer .footer-menu {
+  margin-top: 20px;
+  border-top: 1px solid #e3e3e3;
+  padding: 18px 80px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+footer .footer-menu a {
+  font-size: 12px;
+  font-weight: 600;
+}
+footer .footer-menu .copyright {
+  margin: 15px 0 0 300px;
+  font-size: 12px;
+}
+
+.appointment {
+  color: white;
+  text-align: center;
+  position: relative;
+}
+.appointment .img-hospital {
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+}
+.appointment .book-appointment {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 41px;
+  font-weight: 700;
+}
+.appointment .book-appointment p {
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 400;
+}
+
+.custom-container {
+  height: 62px;
+  width: 100%;
+  max-width: 1000px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.col {
+  padding: 0;
+}
+
+.form-control {
+  border-radius: 0;
+  border: 0;
+}
+
+.form-select {
+  border-right: 1px solid #cccfda;
+}
+
+.custom-height {
+  height: 60px;
+}
+
+.input-group-text {
+  border: none;
+  background-color: white;
+  height: 60px;
+  border-radius: 0;
+}
+
+.play-icon img {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80px;
+}
+
+.section2 {
+  padding: 80px 50px;
+  background-color: #f9f8fd;
+}
+
+.find-and-book {
+  text-align: center;
+  font-size: 31px;
+  font-weight: 600;
+}
+.find-and-book p {
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 2;
+}
+
+.section3 {
+  display: flex;
+  padding: 90px 100px;
+}
+.section3 a {
+  color: #5b83e3;
+  border-radius: 25px !important;
+  padding: 6px 5px;
+}
+.section3 .custom-width {
+  padding: 6px 35px;
+}
+
+.section-content {
+  padding: 100px 0;
+}
+
+.prime-care-to-specialist {
+  font-size: 34px;
+  font-weight: 500;
+  margin: 40px 0;
+}
+
+.card-conatiner {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards {
+  position: relative;
+  margin: 100px 0 70px 0;
+}
+
+.card {
+  border: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #ffffff;
+  max-width: 260px;
+  width: 100%;
+  height: 195px;
+}
+
+.card-top {
+  padding: 30px;
+  background-color: #f9f8fd;
+  clip-path: ellipse(26% 95% at 50% 0);
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+.circle img {
+  padding: 35px;
+}
+
+aside {
+  margin-left: 150px;
+}
+
+.custom-card-measure {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 0;
+  margin: 0 0 25px 30px;
+}
+
+.content {
+  height: auto;
+  width: 100%;
+  max-width: 380px;
+}
+
+.opacity {
+  opacity: 0.2;
+}
+
+.card-img-top {
+  height: 280px;
+  max-width: 100%;
+}
+
+.card-body-size {
+  width: 100%;
+  max-width: 380px;
+}
+
+.card-text {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.card-footer {
+  padding: 5px 10px;
+}
+.card-footer .likes {
+  height: 15px;
+  width: 15px;
+}
+.card-footer span {
+  font-size: 11px;
+  margin-right: 30px;
+}
+.card-footer .rating {
+  height: 40px;
+  width: 60px;
+}
+.card-footer .view-btn {
+  background-color: #ffffff;
+  padding: 2px 5px;
+  margin-left: 100px;
+}
+
+.section4 {
+  padding: 60px 0;
+}
+
+.image-container {
+  position: relative;
+}
+
+.get-started {
+  background-color: rgba(19, 68, 158, 0.812);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 450px;
+  z-index: 1;
+  opacity: 1;
+}
+
+.staff-img {
+  height: 450px;
+  width: 100%;
+}
+
+.text-and-button-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.ready-to-start {
+  z-index: 1;
+  padding: 110px 106px;
+}
+.ready-to-start h2 {
+  color: white;
+  line-height: 3;
+}
+.ready-to-start p {
+  color: white;
+}
+
+.btn-measure {
+  margin-top: 35px;
+}
+.btn-measure button {
+  padding: 18px 100px 18px 50px;
+  border-radius: 0;
+}
+.btn-measure button img {
+  margin-right: 20px;
+}
+
+.section5 {
+  padding: 90px 90px;
+}
+
+.navbar-toggler-icon {
+  color: black;
+}
+
+.best-practices {
+  padding: 50px 0;
+}
+.best-practices .card {
+  margin: 10px;
+  height: 440px;
+  width: 100%;
+  max-width: 364px;
+  border-radius: 0;
+}
+.best-practices .card .card-text {
+  line-height: 2;
+}
+
+.navbar-toggler .icon-bar {
+  background-color: black;
+  height: 2px;
+  width: 20px;
+  margin-top: 20px;
+  display: block;
+  transition: all 0.2s;
+}
+.navbar-toggler .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+.patient-service {
+  background-color: rgba(19, 68, 158, 0.812);
+  position: absolute;
+  width: 100%;
+  height: 700px;
+  z-index: 1;
+  opacity: 1;
+}
+
+.doctors-img {
+  height: 700px;
+  width: 100%;
+}
+
+.text-overlay {
+  position: absolute;
+  display: flex;
+  overflow: hidden;
+  top: 20px;
+  left: 20px;
+}
+
+.ready-to-start {
+  z-index: 1;
+}
+.ready-to-start h2 {
+  color: white;
+  line-height: 3;
+}
+.ready-to-start p {
+  color: white;
+}
+
+.check-box {
+  padding: 10px 0;
+}
+.check-box img {
+  margin-right: 8px;
+}
+.check-box span {
+  color: white;
+}
+
+.price {
+  color: white;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 20px;
+}
+.price .space {
+  padding: 40px;
+}
+.price .align {
+  margin-top: 2px;
+  font-weight: normal;
+}
+.price .font-Weight {
+  font-weight: 50;
+  font-size: 16px;
+}
+
+.zoom-out {
+  margin: 50px 0 0 10px;
+  display: inline-block;
+  transform: scale(3);
+  transform-origin: left;
+  font-weight: 400;
+}
+
+.sign-up {
+  margin-top: 50px;
+}
+
+.trial {
+  margin-top: 30px;
+}
+
+.free-trial {
+  background-color: white;
+  border-radius: 0;
+}
+.free-trial span {
+  padding: 10px 40px;
+}
+
+.patient-review {
+  background-color: rgba(19, 68, 158, 0.812);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  opacity: 1;
+}
+
+.doctor-img {
+  height: 600px;
+  width: 100%;
+}
+
+.user-review {
+  position: absolute;
+  top: 30%;
+  left: 50px;
+  z-index: 1;
+}
+.user-review p {
+  text-align: center;
+  color: white;
+}
+.user-review .review {
+  font-size: 24px;
+}
+
+.submit-enquiry {
+  position: absolute;
+  bottom: 5%;
+  left: 50px;
+  z-index: 1;
+}
+.submit-enquiry p {
+  font-size: 19px;
+  text-align: center;
+  color: white;
+}
+.submit-enquiry button {
+  background-color: white;
+  color: black;
+  padding: 6px 86px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .appointment .book-appointment {
+    font-size: 18px;
+  }
+  .appointment .book-appointment p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .form-select,
+  .input-group-text,
+  .form-control,
+  .btn {
+    font-size: 8px;
+    height: 36px;
+  }
+  .play-icon img {
+    bottom: 50px;
+    height: 30px;
+    width: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+  }
+  .card-top {
+    clip-path: ellipse(10% 95% at 50% 0);
+  }
+}
+@media (max-width: 768px) {
+  .section3 {
+    flex-direction: column;
+  }
+  aside {
+    margin-left: 0;
+  }
+}
+@media (max-width: 768px) {
+  .ready-to-start {
+    padding: 2px 10px;
+  }
+}
+@media (max-width: 600px) {
+  .text-overlay {
+    flex-direction: column;
+  }
+  .btn-measure button {
+    padding: 2px 10px;
+  }
+  .btn-measure button img {
+    height: 24px;
+    width: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .patient-service, .doctors-img {
+    height: 1100px;
+  }
+  .text-overlay {
+    flex-direction: column;
+  }
+}
+@media (max-width: 768px) {
+  .footer-menu {
+    flex-direction: column;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav-measure {
+  padding: 20px 60px;
+}
+
+.navbar-header {
+  margin: 10px 0 0 40px;
+}
+.navbar-header span {
+  font-weight: 700;
+  font-size: 20px;
+  margin-left: 4px;
+}
+
+.nav-link {
+  font-weight: 700;
+  color: black;
+  margin: 8px 30px 0 0;
+}
+
+.already-have-acc {
+  margin: 10px 5px 0 10px;
+}
+.already-have-acc a {
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.create-acc {
+  margin: 8px 0 0 10px;
+  border: 3px solid #cccfda;
+}
+.create-acc button {
+  color: #8a51f9;
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=style.css.map */

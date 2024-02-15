@@ -1,0 +1,68 @@
+$weight: 700;
+$fontSize:16px;
+
+
+.appointment{
+    color:white;
+    text-align: center;
+    position: relative;
+    
+    .img-hospital{  
+       z-index: -1;
+       height:100%;
+       width: 100%;
+   }
+  .book-appointment{
+       position: absolute;
+       top:40%;
+       left:50%;
+       transform: translate(-50%, -50%);
+       font-size: $fontSize + 25px;
+       font-weight: $weight;
+       p{
+           font-size: $fontSize;
+           line-height: 2;
+           font-weight:$weight - 300;
+       }
+    }
+   
+    
+}
+.custom-container{
+   height:62px;
+   width:100%;
+   max-width: 1000px;
+   position: absolute;
+   top: 70%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   
+}
+.col{
+   padding:0;
+}
+.form-control{
+   border-radius: 0;
+   border:0;
+}
+.form-select{
+   border-right: 1px solid #cccfda;
+}
+.custom-height{
+   height:60px;
+}
+.input-group-text{
+   border:none;
+   background-color: white;
+   height:60px;
+   border-radius: 0;
+}
+.play-icon{ 
+   img{
+   position: absolute;
+   top: 85%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   height: 80px;
+   }
+}

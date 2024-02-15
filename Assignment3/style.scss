@@ -1,0 +1,58 @@
+@import 'base/footerSection';
+@import 'base/section1';
+@import 'base/section2';
+@import 'base/section3';
+@import 'base/section4';
+@import 'base/section5';
+@import 'base/mediaQueries';
+
+$weight: 700;
+$fontSize:16px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nav-measure{
+    padding:20px 60px;
+}
+.navbar-header{
+    
+    margin:10px 0 0 40px;
+  span{
+        font-weight:$weight;
+        font-size:$fontSize + 4px ;
+        margin-left:4px;
+  }
+}
+
+.nav-link{
+    font-weight: $weight;
+    color: black;
+    margin:8px 30px 0 0;
+}
+
+.already-have-acc{
+    margin:10px 5px 0 10px;
+    a{
+    color:black;
+    font-weight: $weight;
+    text-decoration: none;
+    }
+}
+
+.create-acc{
+    margin:8px 0 0 10px;
+    border:3px solid #cccfda;
+    button{
+        color:#8a51f9;
+        font-weight: $weight;
+        
+    }
+}
+
+   
+
+
+ 

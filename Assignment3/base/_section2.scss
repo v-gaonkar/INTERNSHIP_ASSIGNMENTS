@@ -1,0 +1,18 @@
+$weight: 700;
+$fontSize:16px;
+
+.section2{
+    padding:80px 50px;
+    background-color: #f9f8fd;
+}
+.find-and-book{
+    text-align: center;
+    font-size: $fontSize + 15px;
+    font-weight: $weight - 100;
+    p{
+        font-weight: $weight - 200;
+        font-size: $fontSize + 7px;
+        line-height: 2;
+    }
+    
+}

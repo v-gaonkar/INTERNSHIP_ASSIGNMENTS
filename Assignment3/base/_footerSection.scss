@@ -1,0 +1,38 @@
+$weight: 700;
+$fontSize:16px;
+
+footer{
+    .footer-body{
+        padding:0 90px;
+    }
+    .title{
+        font-size: $fontSize + 5px;
+        font-weight: $weight - 100;
+        line-height: 3;
+    }
+    .line-space{
+        line-height: 2;
+    }
+    img{
+        margin-right: 12px;
+        height:40px;
+        width:40px;
+    }
+    .footer-menu{
+        margin-top:20px;
+        border-top:1px solid #e3e3e3;
+        padding:18px 80px;
+        display:flex;
+        flex-direction: row;
+        width:100%;
+        a{
+            font-size: $fontSize - 4px;
+            font-weight:$weight - 100 ;
+        }
+        .copyright{
+            margin:15px 0 0 300px;
+            font-size: $fontSize - 4px;
+        }
+    }
+ }
+ 

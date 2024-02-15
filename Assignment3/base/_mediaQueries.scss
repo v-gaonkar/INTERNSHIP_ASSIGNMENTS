@@ -1,0 +1,79 @@
+$weight: 700;
+$fontSize:16px;
+@media (max-width: 767px) {
+    .appointment .book-appointment {
+        font-size: $fontSize + 2px;
+    }
+    
+    .appointment .book-appointment p {
+        font-size: $fontSize - 2px;
+    }
+
+}
+
+@media (max-width: 600px)  {
+    .form-select,
+    .input-group-text,
+    .form-control,
+    .btn {
+        font-size: 8px;
+        height: 36px;
+    }
+    .play-icon img{
+        bottom:50px;
+        height:30px;
+        width:30px;
+    }
+}
+  
+  @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column; 
+    }
+    .card-top{
+        clip-path: ellipse(10% 95% at 50% 0);
+    }
+}
+@media (max-width: 768px) { 
+    .section3 {
+        flex-direction: column;
+    }
+    aside{
+        margin-left:0;
+    }
+}
+@media (max-width: 768px) {
+    .ready-to-start {
+        padding:2px 10px;
+    }
+    
+    }
+    @media (max-width: 600px) {
+
+        .text-overlay {
+            flex-direction: column;
+            
+      }
+      .btn-measure button{
+        padding: 2px 10px;
+        img{
+            height:24px;
+            width: 24px;
+        }
+      }
+    }
+    @media (max-width: 900px) {
+        .patient-service, .doctors-img{
+            height:1100px;
+        }
+        .text-overlay {
+            flex-direction: column;     
+      }
+      
+    }
+
+    @media (max-width:768px){
+        .footer-menu{
+            flex-direction:column;
+        }
+    }
