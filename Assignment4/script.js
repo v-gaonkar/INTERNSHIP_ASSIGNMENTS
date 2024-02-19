@@ -45,13 +45,14 @@ function updateCountdown() {
         return;
     }
     const hours = Math.floor(remainingTime / 3600);
-    const minutes = Math.floor((remainingTime % 3600) / 60);
+    remainingTime = remainingTime % 3600;
+    const minutes = Math.floor(remainingTime / 60);
     const seconds = remainingTime % 60;
     countdown.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
     const progress = Math.round(((countdownInput.value - remainingTime) / countdownInput.value) * 100);
     progressText.textContent = `${progress}%`;
-    if (remainingTime % 5 === 0) {
+    if (remainingTime % 5 == 0) {
         progressFill.style.width = `${progress}%`;
     }
 }
