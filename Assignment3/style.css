@@ -81,7 +81,7 @@ footer .footer-menu .copyright {
 
 .input-group-text {
   border: none;
-  background-color: white;
+  background-color: #ffffff;
   height: 60px;
   border-radius: 0;
 }
@@ -184,7 +184,7 @@ aside {
 }
 
 .custom-body {
-  padding: 20px;
+  padding: 5px 10px;
 }
 
 .card-text {
@@ -524,11 +524,11 @@ aside {
 }
 
 .nav-measure {
-  padding: 20px 60px;
+  padding: 20px 30px;
 }
 
 .navbar-header {
-  margin: 5px 0 0 80px;
+  margin: 5px 0 0 10px;
 }
 .navbar-header span {
   font-weight: 700;
@@ -547,7 +547,7 @@ aside {
 }
 
 .already-have-acc {
-  margin: 10px 5px 0 100px;
+  margin: 10px 0 0 100px;
 }
 .already-have-acc a {
   color: black;
