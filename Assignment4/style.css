@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+}
+
+input {
+  width: 100%;
+  max-width: 200px;
+  height: 30px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  max-width: 207px;
+  height: 30px;
+  background-color: blue;
+  color: white;
+  border: none;
+}
+
+.countdown {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 300px;
+  height: 20px;
+  background-color: rgba(221, 221, 221, 0.8666666667);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin: 20px 0;
+}
+.progress-bar .progress-fill {
+  width: 0%;
+  height: 100%;
+  background-color: blue;
+  transition: width 0.5s ease-in-out;
+  position: absolute;
+}
+.progress-bar .progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=style.css.map */
