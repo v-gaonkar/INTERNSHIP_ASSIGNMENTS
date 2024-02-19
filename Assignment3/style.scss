@@ -19,22 +19,25 @@ $fontSize:16px;
 }
 .navbar-header{
     
-    margin:10px 0 0 40px;
+    margin:5px 0 0 80px;
   span{
         font-weight:$weight;
         font-size:$fontSize + 4px ;
         margin-left:4px;
   }
 }
-
+.navbar-nav{
+    margin-left: 100px;
+}
 .nav-link{
     font-weight: $weight;
     color: black;
     margin:8px 30px 0 0;
+    
 }
 
 .already-have-acc{
-    margin:10px 5px 0 10px;
+    margin:10px 5px 0 100px;
     a{
     color:black;
     font-weight: $weight;
@@ -43,8 +46,10 @@ $fontSize:16px;
 }
 
 .create-acc{
-    margin:8px 0 0 10px;
     border:3px solid #cccfda;
+    width:100%;
+    max-width: 150px;
+    margin-top: 10px;
     button{
         color:#8a51f9;
         font-weight: $weight;

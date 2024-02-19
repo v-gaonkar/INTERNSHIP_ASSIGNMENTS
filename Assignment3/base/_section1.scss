@@ -5,18 +5,13 @@ $fontSize:16px;
 .appointment{
     color:white;
     text-align: center;
-    position: relative;
+    padding-top:200px;
+    background: url("Images/hospital_img.jpg") no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    filter:brightness(0.6);
     
-    .img-hospital{  
-       z-index: -1;
-       height:100%;
-       width: 100%;
-   }
   .book-appointment{
-       position: absolute;
-       top:40%;
-       left:50%;
-       transform: translate(-50%, -50%);
        font-size: $fontSize + 25px;
        font-weight: $weight;
        p{
@@ -29,13 +24,11 @@ $fontSize:16px;
     
 }
 .custom-container{
+   padding: 50px 0 120px 0;
    height:62px;
    width:100%;
-   max-width: 1000px;
-   position: absolute;
-   top: 70%;
-   left: 50%;
-   transform: translate(-50%, -50%);
+   max-width: 900px;
+   margin-top: 20px;
    
 }
 .col{
@@ -58,11 +51,5 @@ $fontSize:16px;
    border-radius: 0;
 }
 .play-icon{ 
-   img{
-   position: absolute;
-   top: 85%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   height: 80px;
-   }
+   padding-bottom: 100px;
 }
