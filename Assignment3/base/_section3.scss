@@ -36,7 +36,7 @@ $fontSize:16px;
     display: flex;
  }
  .custom-card{
-    width:430px;
+    width:400px;
  }
  .content{
    
@@ -56,10 +56,9 @@ $fontSize:16px;
  .custom-footer{
     display: flex;
     justify-content: space-between;
-    margin-right:20px;
     .view-btn{
         background-color: white;
-        padding:2px 5px;
+        padding:2px 15px;
         text-align: center;
         i{
         border-left: 1px solid #e3e3e3;

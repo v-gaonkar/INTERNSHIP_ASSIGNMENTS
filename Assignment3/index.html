@@ -34,14 +34,8 @@
               <a class="nav-link" href="#">CONTACTS</a>
             </li>
           </ul>
-          <form class="d-flex ">
-            <div class="already-have-acc">
-              <a href="#">Aleardy have account?</a>
-            </div>
-            <div class="create-acc">
-              <button type="button" class="btn">Create account</button>
-            </div>
-          </form>
+              <a href="#" class=" nav-item nav-link text-dark already-have-acc">Aleardy have account?</a>
+              <button type="button" class="nav-item btn create-acc">Create account</button>
       </div>
     </div>
     </nav>
@@ -52,8 +46,8 @@
             <p class="search-and-book">Search Doctors & Book appointments online, instantly</p>
         </div>
         <div class="container custom-container">
-            <div class="row g-0">
-              <div class="col">
+            <div class="row g-0 justify-content-center">
+              <div class="col-md-4 col-sm-6">
                 <select class="form-select form-control custom-height">
                     <option selected class="text-muted">Practice category</option>
                     <option>1</option>
@@ -62,7 +56,7 @@
                     <option>4</option>
                 </select>
               </div>
-              <div class="col ">
+              <div class="col-md-4 col-sm-6 ">
                 <div class="input-group">
                     <input type="text" class="form-control custom-height" placeholder="Enter your postcode">
                      <span class="input-group-text">
@@ -70,7 +64,7 @@
                      </span>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-md-4 col-sm-6">
                 <button type="button" class="btn btn-primary form-control custom-height">Search Practice</button>
               </div>
             </div>
@@ -86,35 +80,35 @@
             Find a Doctor and book appointments online instantly!
             <p>Choose the best time for you. Book with a click.</p> 
         </div>
-        <div class="row cards justify-content-center">
-          <div class="card card-size text-center">
-              <h2 class="card circle rounded-circle logo bi bi-heart-pulse text-info"></h2>
+        <div class="row cards justify-content-center ">
+          <div class="card card-size text-center shadow-sm">
+              <div class="card circle rounded-circle"><h2 class="pulse-icon bi bi-heart-pulse text-info"></h2></div>
               <div class="card-content text-muted">
                 <h5>Search doctor, 24/7</h5>
                 <p>No waiting, no hold music</p>
               </div>
           </div>
-          <div class="card card-size text-center">
-              <h2 class="card circle rounded-circle logo bi bi-heart-pulse text-danger"></h2>
-              <div class="card-content text-muted">
-                <h5> Choose best practice</h5>
-                <p>No waiting, no hold music</p>
-              </div>
-          </div>
-          <div class="card card-size text-center">
-              <h2 class="card circle rounded-circle logo bi bi-heart-pulse text-success"></h2>
-              <div class="card-content text-muted">
-              <h5> Book Appointment</h5>
+          <div class="card card-size text-center shadow-sm">
+            <div class="card circle rounded-circle"><h2 class="pulse-icon bi bi-heart-pulse text-danger"></h2></div>
+            <div class="card-content text-muted">
+              <h5>Search doctor, 24/7</h5>
               <p>No waiting, no hold music</p>
             </div>
+        </div>
+        <div class="card card-size text-center shadow-sm">
+          <div class="card circle rounded-circle"><h2 class="pulse-icon bi bi-heart-pulse text-primary"></h2></div>
+          <div class="card-content text-muted">
+            <h5>Book Appointment</h5>
+            <p>No waiting, no hold music</p>
           </div>
-          <div class="card card-size text-center">
-              <h2 class="card circle rounded-circle logo bi bi-heart-pulse"></h2>
-              <div class="card-content text-muted">
-                <h5> Review Service</h5>
-                <p>No waiting, no hold music</p>
-              </div>
+         </div>
+         <div class="card card-size text-center shadow-sm">
+          <div class="card circle rounded-circle"><h2 class="pulse-icon bi bi-heart-pulse"></h2></div>
+          <div class="card-content text-muted">
+            <h5>Review Service</h5>
+            <p>No waiting, no hold music</p>
           </div>
+       </div>
       </div>     
     </div>
   </section>
@@ -165,7 +159,7 @@
       </div>
     <div class="row">
       <div class="col-sm-12 col-md-12">
-      <div class="custom-card-measure">
+      <div class="custom-card-measure shadow-sm">
         <div class="card  border-0 custom-image">
         </div>
         <img src="Images/doctor.png" alt="Card image">
@@ -259,16 +253,16 @@
         <li class="nav-item">
           <a class="nav-link text-muted" href="#">Family Practice</a>
         </li>
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#best-practice-menu">
-        <span class="navbar-toggler-icon"></span>
+         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#best-practice-menu">
+        <span class="navbar-toggler-icon "></span>
     </button>
       </ul>
     </div>
   </div>
   <div class="container mt-3 best-practices">
     <div class="row justify-content-center">
-      <div class="col-md-4 col-sm-6">
-        <div class="card border-0">
+      <div class="col-md-6 col-sm-6 col-lg-4">
+        <div class="card border-0 shadow-sm">
           <img class="card-img-top" src="Images/patient-doctor.avif" alt="Card image">
           <div class="card-body">
             <h4 class="card-title">Insight Medical Family <br>Practice</h4>
@@ -279,32 +273,30 @@
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
-            <small class="bi bi-star"></small>
-            <span class="text-muted">22 REVIEWS</span>
+            <small class="bi bi-star text-muted"> 22 REVIEWS</small>
             <button class="btn view-btn"><span>View</span><i class="bi bi-arrow-right"></i></button>
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="card border-0">
+      <div class="col-md-6 col-sm-6 col-lg-4">
+        <div class="card border-0 ">
           <img class="card-img-top" src="Images/patient-doctor.avif" alt="Card image">
-          <div class="card-body">
-            <h4 class="card-title">Sarajevo Hospital Family <br> Medicine</h4>
-            <p class="card-text text-muted"><i class="bi bi-geo-alt"></i>NEW YORK, 23331 STREET</p>
+          <div class="card-body shadow-xs">
+            <h4 class="card-title">Insight Medical Family<br> Practice</h4>
+            <p class="card-text text-muted"><i class="bi bi-geo-alt "></i>NEW YORK, 23331 STREET</p>
           </div>
           <div class="card-footer footer-measure border-0">
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
-            <small class="bi bi-star"></small>
-            <span class="text-muted">22 REVIEWS</span>
-            <button class="btn view-btn"><span>View</span><i class="bi bi-arrow-right"></i></button>
+            <small class="bi bi-star text-muted"> 22 REVIEWS</small>
+            <button class="btn view-btn"><span>View</span><i class="arrow bi bi-arrow-right text-center"></i></button>
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="card border-0">
+      <div class="col-md-6 col-sm-6 col-lg-4">
+        <div class="card border-0 shadow-sm">
           <img class="card-img-top" src="Images/patient-doctor.avif" alt="Card image">
           <div class="card-body">
             <h4 class="card-title">Insight Medical Family<br> Practice</h4>
@@ -315,9 +307,8 @@
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
             <small class="bi bi-star-fill text-warning"></small>
-            <small class="bi bi-star"></small>
-            <span class="text-muted">22 REVIEWS</span>
-            <button class="btn view-btn"><span>View</span><i class="bi bi-arrow-right"></i></button>
+            <small class="bi bi-star text-muted"> 22 REVIEWS</small>
+            <button class="btn view-btn"><span>View</span><i class="arrow bi bi-arrow-right"></i></button>
           </div>
         </div>
       </div>
@@ -385,7 +376,7 @@
     <div class="container mt-3 best-practices">
       <div class="row justify-content-center">
         <div class="col-md-6 col-sm-6 col-lg-4">
-          <div class="card border-0">
+          <div class="card border-0 shadow-sm">
             <img class="card-img-top" src="Images/diet.png" alt="Card image">
             <div class="card-body">
               <h5 class="card-title">What is the difference between a Nutritionist and a Dietitian ?</h5>
@@ -401,7 +392,7 @@
           </div>
         </div>
         <div class="col-md-6 col-sm-6 col-lg-4">
-          <div class="card border-0">
+          <div class="card border-0 shadow-sm">
             <img class="card-img-top" src="Images/diet.png" alt="Card image">
             <div class="card-body">
               <h5 class="card-title">What is the difference between a Nutritionist and a Dietitian ?</h5>
@@ -417,7 +408,7 @@
           </div>
         </div>
         <div class="col-md-6 col-sm-6 col-lg-4">
-          <div class="card border-0">
+          <div class="card border-0 shadow-sm">
             <img class="card-img-top" src="Images/diet.png" alt="Card image">
             <div class="card-body">
               <h5 class="card-title">What is the difference between a Nutritionist and a Dietitian ?</h5>

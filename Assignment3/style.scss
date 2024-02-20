@@ -37,24 +37,16 @@ $fontSize:16px;
 }
 
 .already-have-acc{
-    margin:10px 0 0;
-    a{
-    color:black;
-    font-weight: $weight;
-    text-decoration: none;
-    }
+    margin:10px 0 0 60px;
 }
 
 .create-acc{
     border:3px solid #cccfda;
     width:100%;
-    max-width: 150px;
-    margin-top: 10px;
-    button{
-        color:#8a51f9;
-        font-weight: $weight;
-        
-    }
+    max-width: 200px;
+    margin: 10px 0 0 60px;
+    color:#8a51f9;
+    font-weight: $weight;
 }
 
    

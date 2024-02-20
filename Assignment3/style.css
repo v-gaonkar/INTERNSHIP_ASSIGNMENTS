@@ -56,9 +56,8 @@ footer .footer-menu .copyright {
 
 .custom-container {
   padding: 50px 0 120px 0;
-  height: 62px;
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   margin-top: 20px;
 }
 
@@ -112,6 +111,8 @@ footer .footer-menu .copyright {
   width: 252px;
   height: 188px;
   margin: 130px 35px 0 15px;
+  border: 1px solid white;
+  box-shadow: 5px 5px 10px 10px #f9f8fd;
 }
 
 .circle {
@@ -120,7 +121,13 @@ footer .footer-menu .copyright {
   width: 110px;
   height: 110px;
   top: -70px;
+  position: relative;
   border: 7px solid #f9f8fd;
+}
+.circle .pulse-icon {
+  position: absolute;
+  left: 35px;
+  top: 30px;
 }
 
 .card-content {
@@ -167,7 +174,7 @@ aside {
 }
 
 .custom-card {
-  width: 430px;
+  width: 400px;
 }
 
 .content {
@@ -190,11 +197,10 @@ aside {
 .custom-footer {
   display: flex;
   justify-content: space-between;
-  margin-right: 20px;
 }
 .custom-footer .view-btn {
   background-color: white;
-  padding: 2px 5px;
+  padding: 2px 15px;
   text-align: center;
 }
 .custom-footer .view-btn i {
@@ -378,7 +384,7 @@ aside {
 }
 
 .footer-measure {
-  padding: 20px 10px;
+  padding: 14px 10px;
 }
 .footer-measure i {
   float: left;
@@ -386,14 +392,16 @@ aside {
 }
 .footer-measure .view-btn {
   background-color: #ffffff;
-  padding: 2px 5px;
   text-align: center;
   float: right;
+}
+.footer-measure .view-btn span {
+  padding: 2px 10px;
 }
 .footer-measure .view-btn i {
   border-left: 1px solid #e3e3e3;
   float: right;
-  margin: 0 2px 0 15px;
+  margin-right: 2px;
 }
 
 @media (max-width: 767px) {
@@ -410,7 +418,7 @@ aside {
   .form-control,
   .btn {
     font-size: 12px;
-    height: 36px;
+    height: 50px;
   }
 }
 @media (max-width: 768px) {
@@ -477,6 +485,54 @@ aside {
     margin: 0 auto;
   }
 }
+@media (max-width: 768px) {
+  .section3, .section4, .section5 {
+    padding: 10px;
+  }
+  .section3 .text-and-button-overlay, .section4 .text-and-button-overlay, .section5 .text-and-button-overlay {
+    padding: 10px;
+  }
+  .card {
+    padding: 5px;
+  }
+  .card-title {
+    font-size: 18px;
+  }
+  .card-footer {
+    padding: 2px;
+  }
+  .card-text {
+    font-size: 14px;
+  }
+  .submit-enquiry button {
+    font-size: 10px;
+    margin-left: 200px;
+  }
+  .footer-measure small {
+    font-size: 10px;
+  }
+  .footer-measure .view-btn span {
+    padding: 1px 10px;
+  }
+  .footer-measure .view-btn i {
+    margin-right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .custom-card-measure {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .custom-card-measure .custom-card {
+    width: 100%;
+    margin: 0;
+    max-width: 300px;
+  }
+  .custom-card-measure .custom-card .custom-image {
+    margin-bottom: 20px;
+  }
+}
 @media (max-width: 500px) {
   .section3, .section4, .section5 {
     padding: 10px;
@@ -496,28 +552,37 @@ aside {
   .card-text {
     font-size: 12px;
   }
-  .vew-btn, span {
+  .vew-btn {
+    padding: 5px 10px;
+    font-size: 9px;
+  }
+}
+@media (max-width: 500px) and (max-width: 500px) {
+  .section3, .section4, .section5 {
+    padding: 10px;
+  }
+  .section3 .text-and-button-overlay, .section4 .text-and-button-overlay, .section5 .text-and-button-overlay {
+    padding: 10px;
+  }
+  .card {
+    padding: 5px;
+  }
+  .card-title {
+    font-size: 10px;
+  }
+  .card-footer {
+    padding: 2px;
+  }
+  .card-text {
+    font-size: 12px;
+  }
+  .vew-btn {
     padding: 5px 10px;
     font-size: 9px;
   }
   .submit-enquiry button {
-    padding: 6px 20px;
     font-size: 10px;
-  }
-}
-@media (max-width: 768px) {
-  .custom-card-measure {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .custom-card-measure .custom-card {
-    width: 100%;
-    margin: 0;
-    max-width: 300px;
-  }
-  .custom-card-measure .custom-card .custom-image {
-    margin-bottom: 20px;
+    margin-left: 90px;
   }
 }
 * {
@@ -550,21 +615,14 @@ aside {
 }
 
 .already-have-acc {
-  margin: 10px 0 0;
-}
-.already-have-acc a {
-  color: black;
-  font-weight: 700;
-  text-decoration: none;
+  margin: 10px 0 0 60px;
 }
 
 .create-acc {
   border: 3px solid #cccfda;
   width: 100%;
-  max-width: 150px;
-  margin-top: 10px;
-}
-.create-acc button {
+  max-width: 200px;
+  margin: 10px 0 0 60px;
   color: #8a51f9;
   font-weight: 700;
 }
