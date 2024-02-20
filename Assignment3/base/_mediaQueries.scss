@@ -1,47 +1,9 @@
 $weight: 700;
 $fontSize:16px;
-@media (max-width: 767px) {
-    .appointment .book-appointment {
-        font-size: $fontSize + 2px;
-    }
-    
-    .appointment .book-appointment p {
-        font-size: $fontSize - 2px;
-    }
-
-}
-
-@media (max-width: 600px)  {
-    
-    .form-select,
-    .input-group-text,
-    .form-control,
-    .btn {
-        font-size: 12px;
-        height: 50px;
-    }
-}
-
-@media (max-width: 768px) { 
-    .section3 {
+@media (max-width: 600px) {
+    .text-overlay {
         flex-direction: column;
-    }
-    aside{
-        margin-left:0;
-    }
-}
-@media (max-width: 768px) {
-    .ready-to-start {
-        padding:2px 10px;
-    }
-    
-    }
-    @media (max-width: 600px) {
-
-        .text-overlay {
-            flex-direction: column;
-            
-      }
+         }
       .btn-measure button{
         padding: 2px 5px;
       }
@@ -53,14 +15,16 @@ $fontSize:16px;
         .text-overlay {
             flex-direction: column;     
       }
+      .form-select,
+      .input-group-text,
+      .form-control,
+      .btn {
+        font-size: 12px;
+        height: 50px;
+    }
       
     }
 
-    @media (max-width:768px){
-        .footer-menu{
-            flex-direction:column;
-        }
-    }
     @media (max-width:1000px){
         .section1, .section3, .section5, .section4, .section-content{
             padding:15px;
@@ -76,24 +40,6 @@ $fontSize:16px;
         }
     
     }
-    @media (max-width: 768px) {
-        .section1, .section3, .section5, .section4{
-            padding:15px;
-            .text-and-button-overlay{
-                padding:20px;
-            }   
-        }
-        .view-btn {
-            font-size: 70%; 
-        }
-        .submit-enquiry{
-        button{
-            padding:6px 30px;
-            font-size: 12px;
-            margin:0 auto;
-        }
-    }
-    }
    
        @media (max-width: 768px) {
         .section3, .section4, .section5{
@@ -101,6 +47,16 @@ $fontSize:16px;
             .text-and-button-overlay{
                 padding:10px;
             }   
+        }
+        .appointment .book-appointment {
+            font-size: $fontSize + 2px;
+        }
+        
+        .appointment .book-appointment p {
+            font-size: $fontSize - 2px;
+        }
+        .ready-to-start {
+            padding:2px 10px;
         }
         .card{
             padding:5px;
@@ -117,8 +73,14 @@ $fontSize:16px;
         .submit-enquiry{
             button{
                 font-size: 10px;
-                margin-left:200px;
+                margin-left:100px;
             }
+        }
+        .section3 {
+            flex-direction: column;
+        }
+        aside{
+            margin-left:0;
         }
         .footer-measure{
             small{
@@ -129,10 +91,12 @@ $fontSize:16px;
                     padding:1px 10px;
                 }
                 i{
-                
-                margin-right:0;
+               margin-right:0;
                 }
             }
+        }
+        .footer-menu{
+            flex-direction:column;
         }
       }
       @media (max-width: 768px) {
@@ -175,34 +139,10 @@ $fontSize:16px;
       padding: 5px 10px;
       font-size: 9px; 
     }
-    @media (max-width: 500px) {
-        .section3, .section4, .section5{
-            padding:10px;
-            .text-and-button-overlay{
-                padding:10px;
-            }   
-        }
-        .card{
-            padding:5px;
-        }
-        .card-title{
+    .submit-enquiry{
+        button{
             font-size: 10px;
+            margin-left:50px;
         }
-        .card-footer{
-            padding:2px;
-        }
-        .card-text {
-          font-size: 12px; 
-        }
-        .vew-btn {
-          padding: 5px 10px;
-          font-size: 9px; 
-        }
-        .submit-enquiry{
-            button{
-                font-size: 10px;
-                margin-left:90px;
-            }
-        }
-      }
-  }
+    }
+}
