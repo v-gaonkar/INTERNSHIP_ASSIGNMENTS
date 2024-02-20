@@ -268,18 +268,6 @@ aside {
   line-height: 2;
 }
 
-.navbar-toggler .icon-bar {
-  background-color: black;
-  height: 2px;
-  width: 20px;
-  margin-top: 20px;
-  display: block;
-  transition: all 0.2s;
-}
-.navbar-toggler .icon-bar + .icon-bar {
-  margin-top: 4px;
-}
-
 .image-container {
   background: url("Images/hospital-staff.jpg");
   opacity: 1;
@@ -392,6 +380,7 @@ aside {
   background-color: #ffffff;
   text-align: center;
   float: right;
+  background-color: white;
 }
 .footer-measure .view-btn span {
   padding: 2px 10px;
@@ -399,7 +388,7 @@ aside {
 .footer-measure .view-btn i {
   border-left: 1px solid #e3e3e3;
   float: right;
-  margin-right: 2px;
+  margin: 0 2px;
 }
 
 @media (max-width: 600px) {
@@ -422,7 +411,6 @@ aside {
   .form-control,
   .btn {
     font-size: 12px;
-    height: 50px;
   }
 }
 @media (max-width: 1000px) {
@@ -530,7 +518,7 @@ aside {
   }
   .submit-enquiry button {
     font-size: 10px;
-    margin-left: 50px;
+    padding: 10px;
   }
 }
 * {
