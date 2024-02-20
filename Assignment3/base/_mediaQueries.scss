@@ -61,12 +61,18 @@ $fontSize:16px;
         }
     }
     @media (max-width:1000px){
-        .section1, .section3, .section5, .section4{
+        .section1, .section3, .section5, .section4, .section-content{
             padding:15px;
             .text-and-button-overlay, .text-overlay{
                 padding:20px;
-            }   
+            }  
+            aside{
+                padding:100px 0;
+            }
         } 
+        .custom-card{
+            width:300px;
+        }
     
     }
     @media (max-width: 768px) {
@@ -104,18 +110,18 @@ $fontSize:16px;
             padding:2px;
         }
         .card-text {
-          font-size: 12px; /* Reduce font size for card body and footer */
+          font-size: 12px; 
         }
         .vew-btn,span {
-          padding: 5px 10px; /* Reduce button padding */
-          font-size: 9px; /* Reduce button font size */
+          padding: 5px 10px;
+          font-size: 9px; 
         }
         
         .submit-enquiry{
+            
             button{
                 padding:6px 20px;
                 font-size: 10px;
-                margin:0 auto;
             }
         }
       }

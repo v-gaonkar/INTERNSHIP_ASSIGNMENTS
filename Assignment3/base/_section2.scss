@@ -16,10 +16,6 @@ $fontSize:16px;
     }
     
 }
-.cards {
-    margin: 0 auto 60px;
-}
-
 .card-size {
     border:0;
     border-radius: 0;
@@ -29,14 +25,13 @@ $fontSize:16px;
 }
 
 .circle {
-    padding: 34px;
+    padding: 28px;
     margin: 0 auto;
     width: 110px;
     height: 110px;
-    border: 6px solid #f9f8fd;
     top:-70px;
+    border: 7px solid #f9f8fd;
 }
-
 .card-content {
     position: relative;
     top:-40px;
