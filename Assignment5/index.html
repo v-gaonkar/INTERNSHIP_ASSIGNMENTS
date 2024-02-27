@@ -22,12 +22,12 @@
 <body ng-app="movieSearch" layout="column" ng-controller="MovieController as ctrl">
     <div ng-controller="ToggleList">
         <md-toolbar layout="row">
-            <md-button class="menu" ng-click="toggleLeft();">
+            <md-button class="menu" ng-click="toggleLeft();" ng-hide="isSidenavLockedOpen()">
                 <md-icon>
                     menu
                 </md-icon>
             </md-button>
-            <div flex="20" layout="row" layout-align="start center">
+            <div flex="20" layout layout-align="center center">
                 <h3>Genres</h3>
             </div>
             <div flex layout="row" layout-align="center center">
@@ -35,9 +35,9 @@
             </div>
         </md-toolbar>
     </div>
-    <div class="container" layout="row" flex>
-        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" flex="20" md-whiteframe="4dp" md-component-id="left"
-            class="md-sidenav-left">
+    <div class="container" layout="row" flex >
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" flex-sm="30" flex-gt-sm="20" flex-xs="30" md-whiteframe="4dp"
+         md-component-id="left" class="md-sidenav-left">
             <md-list>
                 <md-list-item ng-class="{ 'selected': ctrl.selectedGenre === 'ALL' }"
                     ng-click="ctrl.selectGenre('ALL')">
@@ -56,7 +56,7 @@
                     <md-icon>search</md-icon>
                 </md-input-container>
             </form>
-            <div ng-show="ctrl.filteredMovies.length > 0" layout="row" layout-wrap>
+            <div ng-show="ctrl.filteredMovies.length > 0" layout="row" layout-wrap> 
                 <md-card flex-gt-sm="20" flex-sm="30" flex-lt-sm="25" ng-repeat="movie in ctrl.filteredMovies"
                     ng-click="ctrl.showDialog(movie)" class="movie-card">
                     <img ng-src="{{ movie.Poster }}" alt="Movie Poster">
