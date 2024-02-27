@@ -1,7 +1,4 @@
-.zoomed {
-    transform: scale(1.2); /* Scale the card up by 20% */
-    transition: transform 0.3s ease; /* Apply smooth transition */
-}
+
 .custom-font{
     font-size:12px;
     margin:0;
@@ -20,4 +17,7 @@
 }
 .search-input{
     justify-content: flex-start;
+}
+.movie-card{
+    margin:20px 0 0 50px;
 }

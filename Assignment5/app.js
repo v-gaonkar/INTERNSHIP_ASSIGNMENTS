@@ -4,9 +4,9 @@ myApp.controller('ToggleList', function ($scope, $mdSidenav) {
     $scope.toggleLeft = buildToggler('left');
 
     function buildToggler(componentId) {
-      return function() {
-        $mdSidenav(componentId).toggle();
-      };
+        return function () {
+            $mdSidenav(componentId).toggle();
+        };
     }
 });
 
@@ -16,57 +16,62 @@ myApp.controller('MovieController', function ($http, $mdDialog) {
     ctrl.genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi'];
     ctrl.selectedGenre = 'ALL';
     ctrl.searchText = '';
-    ctrl.movies = []; // Array to store all movies
-    ctrl.filteredMovies = []; // Array to store filtered movies
+    ctrl.movies = [];
+    ctrl.filteredMovies = [];
 
-    // Load movies from local storage on initialization
-    ctrl.loadMovies = function() {
+    ctrl.loadMovies = function () {
         var storedMovies = localStorage.getItem('movies');
         ctrl.movies = storedMovies ? JSON.parse(storedMovies) : [];
-        // Set filteredMovies to movies on load to display all initially
         ctrl.filteredMovies = ctrl.movies;
     };
 
-    ctrl.selectGenre = function (genre) {
-        ctrl.selectedGenre = genre;
-    };
-
-    // Call loadMovies on controller initialization
-    ctrl.loadMovies();
-
     ctrl.searchMovie = function () {
-        // Check if movie data is available in local storage
         var storedMovie = localStorage.getItem('searchedMovie_' + ctrl.searchText);
-
+        console.log('Search text:', ctrl.searchText);
+        console.log('Stored movie:', storedMovie);
+    
         if (storedMovie) {
-            // If movie data is found in local storage, parse and display it
             console.log('Movie data fetched from local storage:', storedMovie);
             ctrl.movie = JSON.parse(storedMovie);
-            ctrl.dataSource = 'Local Storage'; // Flag indicating the source of the data
-
-            // Filter movies based on selected genre
-            ctrl.filteredMovies = ctrl.movies.filter(function(movie) {
-                return movie.Genre && movie.Genre.toLowerCase().includes(ctrl.selectedGenre.toLowerCase());
-            });
+            ctrl.dataSource = 'Local Storage';
+    
+            ctrl.filteredMovies = [ctrl.movie];
+    
+            if (ctrl.searchText) {
+                console.log('Clearing genre filter');
+                ctrl.selectedGenre = 'ALL';
+            }
+    
         } else {
-            // If movie data is not found in local storage, make an API call
             $http.get('http://www.omdbapi.com/?apikey=f5b4a719&t=' + ctrl.searchText)
-            .then(function (response) {
-                console.log('Success! Response from API:', response.data);
-                ctrl.movie = response.data;
-                // Store fetched movie data in local storage
-                localStorage.setItem('searchedMovie_' + ctrl.searchText, JSON.stringify(response.data));
-                ctrl.dataSource = 'API'; // Flag indicating the source of the data
-                // Filter movies based on selected genre
-                ctrl.filteredMovies = ctrl.movies.filter(function(movie) {
-                    return movie.Genre && movie.Genre.toLowerCase().includes(ctrl.selectedGenre.toLowerCase());
+                .then(function (response) {
+                    console.log('Success! Response from API:', response.data);
+                    if (response.data.Response === 'True') {
+                        ctrl.movie = response.data;
+                        localStorage.setItem('searchedMovie_' + ctrl.searchText, JSON.stringify(response.data));
+                        ctrl.filteredMovies = [ctrl.movie];
+                        if (ctrl.searchText) {
+                            console.log('Clearing genre filter');
+                            ctrl.selectedGenre = 'ALL';
+                        }
+                    } else {
+                        console.log('Movie not found:', response.data.Error);
+                        alert('Movie not found: ' + response.data.Error);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error fetching movie details:', error);
+                    alert('Error fetching movie details. Please try again later.');
                 });
-            })
-            .catch(function (error) {
-                console.error('Error fetching movie details:', error);
-                // Log the error to the console
-            });
         }
+    };    
+    
+    ctrl.loadMovies();
+
+    ctrl.applyGenreFilter = function () {
+        ctrl.filteredMovies = ctrl.movies.filter(function (movie) {
+            return ctrl.selectedGenre === 'ALL' || movie.Genre.toLowerCase().includes(ctrl.selectedGenre.toLowerCase());
+        });
     };
 
     for (var key in localStorage) {
@@ -75,20 +80,17 @@ myApp.controller('MovieController', function ($http, $mdDialog) {
         }
     }
 
-    // Set filteredMovies to all movies initially
-    ctrl.filteredMovies = ctrl.movies;
-
-    ctrl.mapRating = function () {
-        if (!ctrl.movie || !ctrl.movie.imdbRating) {
-            return 0; // Default to 0 if movie or IMDb rating is not available
+    ctrl.mapRating = function (movie) {
+        if (!movie || !movie.imdbRating) {
+            return 0;
         }
-
-        // IMDb rating is out of 10, so we map it to a 5 scale
-        var rating = parseFloat(ctrl.movie.imdbRating);
-        return Math.round((rating / 2) * 10) / 10; // Map to 5 scale with one decimal point
+    
+        var rating = parseFloat(movie.imdbRating);
+        return Math.round(rating / 2);
     };
 
-    ctrl.showDialog = function(movie) {
+    ctrl.showDialog = function (movie) {
+        console.log("Clicked movie:", movie);
         ctrl.selectedMovie = angular.copy(movie);
 
         $mdDialog.show({
@@ -102,54 +104,73 @@ myApp.controller('MovieController', function ($http, $mdDialog) {
             }
         });
     };
+
+    ctrl.selectGenre = function (genre) {
+        ctrl.selectedGenre = genre;
+        if (genre === 'ALL') {
+            ctrl.filteredMovies = ctrl.movies;
+        } else {
+            var uniqueMovies = new Set();
+            ctrl.filteredMovies = ctrl.movies.filter(function (movie) {
+                var genreMatches = !genre || (movie.Genre && movie.Genre.toLowerCase().includes(genre.toLowerCase()));
+                var isUnique = !uniqueMovies.has(movie.Title);
+                if (genreMatches && isUnique) {
+                    uniqueMovies.add(movie.Title);
+                    console.log("Added to filteredMovies:", movie.Title); 
+                    return true;
+                }
+                return false;
+            });
+        }
+        console.log("Filtered movies:", ctrl.filteredMovies); 
+    };
+    
+
 });
 
-myApp.controller('DialogController', ['$mdDialog', '$scope', 'selectedMovie', function($mdDialog, $scope, selectedMovie) {
+myApp.controller('DialogController', ['$mdDialog', '$scope', 'selectedMovie', function ($mdDialog, $scope, selectedMovie) {
     var dialogCtrl = this;
-    dialogCtrl.selectedMovie = angular.copy(selectedMovie); // Keep a copy of the original movie data
-    var originalMovie = angular.copy(selectedMovie); // Keep a copy of the original movie data
+    dialogCtrl.selectedMovie = angular.copy(selectedMovie);
+    var originalMovie = angular.copy(selectedMovie);
 
-    dialogCtrl.resetChanges = function() {
-        // Reset the edited data back to its original values
+    dialogCtrl.resetChanges = function () {
         dialogCtrl.selectedMovie = angular.copy(selectedMovie);
     };
 
     dialogCtrl.userRating = selectedMovie.rating;
 
-    // Number of initially editable stars (corresponding to the initial rating)
-    dialogCtrl.editableStars = selectedMovie.rating;
-
-    // Function to toggle star state
-    dialogCtrl.toggleStar = function(rating) {
+    dialogCtrl.toggleStar = function (rating) {
         dialogCtrl.userRating = rating;
-        dialogCtrl.editableStars = rating;
     };
-    // Watch for changes in selectedMovie and update local storage
-    dialogCtrl.saveChanges = function() {
 
-        // Update local storage for each field that has changed
-        angular.forEach(dialogCtrl.selectedMovie, function(value, key) {
+    dialogCtrl.saveChanges = function () {
+        angular.forEach(dialogCtrl.selectedMovie, function (value, key) {
             if (value !== originalMovie[key]) {
                 updateLocalStorage(key, value);
             }
         });
         $mdDialog.hide();
     };
-    dialogCtrl.cancel = function() {
-        $mdDialog.cancel();
+
+    dialogCtrl.closeDialog = function () {
+        $mdDialog.hide();
     };
 
+     dialogCtrl.mapRating = function () {
+    if (!dialogCtrl.selectedMovie || !dialogCtrl.selectedMovie.imdbRating) {
+        return 0;
+    }
+
+    var rating = parseFloat(dialogCtrl.selectedMovie.imdbRating);
+    return Math.round(rating / 2);
+};
 
     function updateLocalStorage(fieldName, fieldValue) {
         try {
-            // Get the current movie object from local storage
             var storedMovie = localStorage.getItem('searchedMovie_' + dialogCtrl.selectedMovie.Title);
             if (storedMovie) {
-                // Parse the stored movie object
                 var movie = JSON.parse(storedMovie);
-                // Update the specific field
                 movie[fieldName] = fieldValue;
-                // Update local storage with the updated movie object
                 localStorage.setItem('searchedMovie_' + dialogCtrl.selectedMovie.Title, JSON.stringify(movie));
                 console.log(fieldName + " updated successfully");
             } else {
