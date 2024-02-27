@@ -13,11 +13,23 @@ angular.module('movieSearch.movieController', [])
         ctrl.movies = storedMovies ? JSON.parse(storedMovies) : [];
         ctrl.filteredMovies = ctrl.movies;
     };
+    
+    ctrl.loadMovies();
+
+    ctrl.selectGenre = function (genre) {
+    ctrl.selectedGenre = genre;
+    if (genre === 'ALL') {
+        ctrl.filteredMovies = ctrl.movies;
+    } else {
+        ctrl.filteredMovies = ctrl.movies.filter(function (movie) {
+            var genreMatches = movie.Genre && movie.Genre.includes(genre);
+            return genreMatches;
+        });
+    }
+};
 
     ctrl.searchMovie = function () {
         var storedMovie = localStorage.getItem('searchedMovie_' + ctrl.searchText);
-        console.log('Search text:', ctrl.searchText);
-        console.log('Stored movie:', storedMovie);
     
         if (storedMovie) {
             console.log('Movie data fetched from local storage:', storedMovie);
@@ -48,20 +60,11 @@ angular.module('movieSearch.movieController', [])
                         alert('Movie not found: ' + response.data.Error);
                     }
                 })
-                .catch(function (error) {
-                    console.error('Error fetching movie details:', error);
+                .catch(function () {
                     alert('Error fetching movie details. Please try again later.');
                 });
         }
     };    
-    
-    ctrl.loadMovies();
-
-    ctrl.applyGenreFilter = function () {
-        ctrl.filteredMovies = ctrl.movies.filter(function (movie) {
-            return ctrl.selectedGenre === 'ALL' || movie.Genre.toLowerCase().includes(ctrl.selectedGenre.toLowerCase());
-        });
-    };
 
     for (var key in localStorage) {
         if (key.startsWith('searchedMovie_')) {
@@ -79,7 +82,6 @@ angular.module('movieSearch.movieController', [])
     };
 
     ctrl.showDialog = function (movie) {
-        console.log("Clicked movie:", movie);
         ctrl.selectedMovie = angular.copy(movie);
 
         $mdDialog.show({
@@ -93,25 +95,4 @@ angular.module('movieSearch.movieController', [])
             }
         });
     };
-
-    ctrl.selectGenre = function (genre) {
-        ctrl.selectedGenre = genre;
-        if (genre === 'ALL') {
-            ctrl.filteredMovies = ctrl.movies;
-        } else {
-            var uniqueMovies = new Set();
-            ctrl.filteredMovies = ctrl.movies.filter(function (movie) {
-                var genreMatches = !genre || (movie.Genre && movie.Genre.toLowerCase().includes(genre.toLowerCase()));
-                var isUnique = !uniqueMovies.has(movie.Title);
-                if (genreMatches && isUnique) {
-                    uniqueMovies.add(movie.Title);
-                    console.log("Added to filteredMovies:", movie.Title); 
-                    return true;
-                }
-                return false;
-            });
-        }
-        console.log("Filtered movies:", ctrl.filteredMovies); 
-    };
-    
 }]);

@@ -57,7 +57,7 @@
                 </md-input-container>
             </form>
             <div ng-show="ctrl.filteredMovies.length > 0" layout="row" layout-wrap>
-                <md-card flex-gt-sm="20" flex-sm="40" flex-lt-sm="30" ng-repeat="movie in ctrl.filteredMovies"
+                <md-card flex-gt-sm="20" flex-sm="30" flex-lt-sm="25" ng-repeat="movie in ctrl.filteredMovies"
                     ng-click="ctrl.showDialog(movie)" class="movie-card">
                     <img ng-src="{{ movie.Poster }}" alt="Movie Poster">
                     <div class="star-container">

@@ -1,7 +1,7 @@
 angular.module('movieSearch.toggleList', [])
-.controller('ToggleList', ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
+.controller('ToggleList', ['$scope', function ($mdSidenav) {
     var vm = this;
-    $scope.toggleLeft = buildToggler('left');
+    vm.toggleLeft = buildToggler('left');
 
     function buildToggler(componentId) {
         return function() {
