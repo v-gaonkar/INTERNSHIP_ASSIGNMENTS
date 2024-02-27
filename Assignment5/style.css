@@ -1,0 +1,23 @@
+.zoomed {
+    transform: scale(1.2); /* Scale the card up by 20% */
+    transition: transform 0.3s ease; /* Apply smooth transition */
+}
+.custom-font{
+    font-size:12px;
+    margin:0;
+    line-height: 1;
+}
+.star-container{
+    padding:20px 0 30px 0;
+}
+.star-icon{
+    font-size: 20px;
+}
+.custom-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-input{
+    justify-content: flex-start;
+}

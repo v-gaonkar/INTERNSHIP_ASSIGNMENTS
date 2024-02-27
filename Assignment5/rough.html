@@ -1,0 +1,406 @@
+User
+var myApp = angular.module("movieSearch", ['ngMaterial']);
+
+myApp.controller('MovieController', function ($http, $mdDialog) {
+  var ctrl = this;
+
+  ctrl.genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi'];
+  ctrl.selectedGenre = 'ALL';
+  ctrl.searchText = '';
+  ctrl.movies = []; // Array to store all movies
+  ctrl.filteredMovies = []; // Array to store filtered movies
+
+  // Load movies from local storage on initialization
+  ctrl.loadMovies = function() {
+    var storedMovies = localStorage.getItem('movies');
+    ctrl.movies = storedMovies ? JSON.parse(storedMovies) : [];
+    // Set filteredMovies to movies on load to display all initially
+    ctrl.filteredMovies = ctrl.movies;
+  };
+
+  ctrl.selectGenre = function (genre) {
+    ctrl.selectedGenre = genre;
+
+    // Filter movies based on selected genre (if not ALL)
+    if (ctrl.selectedGenre === 'ALL') {
+      ctrl.filteredMovies = ctrl.movies;
+    } else {
+      ctrl.filteredMovies = ctrl.movies.filter(function(movie) {
+        // Check if the movie has the 'Genre' property and includes selected genre
+        return movie.Genre && movie.Genre.toLowerCase().includes(ctrl.selectedGenre.toLowerCase());
+      });
+    }
+  };
+
+  // Call loadMovies on controller initialization
+  ctrl.loadMovies();
+
+
+
+    ctrl.searchMovie = function () {
+        // Check if movie data is available in local storage
+        var storedMovie = localStorage.getItem('searchedMovie_' + ctrl.searchText);
+    
+        if (storedMovie) {
+            // If movie data is found in local storage, parse and display it
+            console.log('Movie data fetched from local storage:', storedMovie);
+            ctrl.movie = JSON.parse(storedMovie);
+            ctrl.dataSource = 'Local Storage'; // Flag indicating the source of the data
+
+            // Filter movies based on selected genre
+            ctrl.selectGenre(ctrl.selectedGenre);
+        } else {
+            // If movie data is not found in local storage, make an API call
+            $http.get('http://www.omdbapi.com/?apikey=f5b4a719&t=' + ctrl.searchText)
+    .then(function (response) {
+        console.log('Success! Response from API:', response.data);
+        ctrl.movie = response.data;
+        // Store fetched movie data in local storage
+        localStorage.setItem('searchedMovie_' + ctrl.searchText, JSON.stringify(response.data));
+        ctrl.dataSource = 'API'; // Flag indicating the source of the data
+        // Filter movies based on selected genre
+        ctrl.selectGenre(ctrl.selectedGenre);
+    })
+    .catch(function (error) {
+        console.error('Error fetching movie details:', error);
+        // Log the error to the console
+    });
+        }
+    };
+    
+    for (var key in localStorage) {
+        if (key.startsWith('searchedMovie_')) {
+            ctrl.movies.push(JSON.parse(localStorage.getItem(key)));
+        }
+    }
+
+    // Set filteredMovies to all movies initially
+    ctrl.filteredMovies = ctrl.movies;
+
+    ctrl.mapRating = function () {
+        if (!ctrl.movie || !ctrl.movie.imdbRating) {
+            return 0; // Default to 0 if movie or IMDb rating is not available
+        }
+
+        // IMDb rating is out of 10, so we map it to a 5 scale
+        var rating = parseFloat(ctrl.movie.imdbRating);
+        return Math.round((rating / 2) * 10) / 10; // Map to 5 scale with one decimal point
+    };
+
+    ctrl.showDialog = function(movie) {
+        ctrl.selectedMovie = angular.copy(movie);
+
+        $mdDialog.show({
+            controller: 'DialogController',
+            controllerAs: 'dialogCtrl',
+            templateUrl: 'Edit_Details.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            locals: {
+                selectedMovie: ctrl.selectedMovie
+            }
+        });
+    };
+});
+
+myApp.controller('DialogController', ['$mdDialog', '$scope', 'selectedMovie', function($mdDialog, $scope, selectedMovie) {
+    var dialogCtrl = this;
+    dialogCtrl.selectedMovie = angular.copy(selectedMovie); // Keep a copy of the original movie data
+    var originalMovie = angular.copy(selectedMovie); // Keep a copy of the original movie data
+
+    dialogCtrl.resetChanges = function() {
+        // Reset the edited data back to its original values
+        dialogCtrl.selectedMovie = angular.copy(selectedMovie);
+    };
+
+    dialogCtrl.userRating = selectedMovie.rating;
+
+    // Number of initially editable stars (corresponding to the initial rating)
+    dialogCtrl.editableStars = selectedMovie.rating;
+
+    // Function to toggle star state
+    dialogCtrl.toggleStar = function(rating) {
+        dialogCtrl.userRating = rating;
+        dialogCtrl.editableStars = rating;
+    };
+    // Watch for changes in selectedMovie and update local storage
+    dialogCtrl.saveChanges = function() {
+
+        // Update local storage for each field that has changed
+        angular.forEach(dialogCtrl.selectedMovie, function(value, key) {
+            if (value !== originalMovie[key]) {
+                updateLocalStorage(key, value);
+            }
+        });
+        $mdDialog.hide();
+    };
+    dialogCtrl.cancel = function() {
+        $mdDialog.cancel();
+    };
+    
+
+    function updateLocalStorage(fieldName, fieldValue) {
+        try {
+            // Get the current movie object from local storage
+            var storedMovie = localStorage.getItem('searchedMovie_' + dialogCtrl.selectedMovie.Title);
+            if (storedMovie) {
+                // Parse the stored movie object
+                var movie = JSON.parse(storedMovie);
+                // Update the specific field
+                movie[fieldName] = fieldValue;
+                // Update local storage with the updated movie object
+                localStorage.setItem('searchedMovie_' + dialogCtrl.selectedMovie.Title, JSON.stringify(movie));
+                console.log(fieldName + " updated successfully");
+            } else {
+                console.error("Movie not found in local storage");
+            }
+        } catch (error) {
+            console.error("Error updating local storage:", error);
+        }
+    }
+}]);
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-app="movieSearch" layout="column" ng-controller="MovieController as ctrl">
+    <div ng-controller="ToggleList">
+    <md-toolbar layout="row">
+            <md-button class="menu" ng-click="toggleLeft();">
+                <md-icon>
+                    menu
+                </md-icon>
+            </md-button>
+        <div flex="20" layout="row" layout-align="center center">
+            <h3>Genres</h3>
+        </div>
+        <div flex layout="row" layout-align="center center">
+            <h3>Movie Database</h3>
+        </div>
+    </md-toolbar>
+    </div>
+    <div class="container" layout="row" flex>
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" flex="20" md-whiteframe="4dp" md-component-id="left" class="md-sidenav-left">
+            <md-list>
+                <md-list-item ng-class="{ 'selected': ctrl.selectedGenre === 'ALL' }">
+                        ALL
+                </md-list-item>
+                <md-list-item ng-repeat="genre in ctrl.genres" ng-click="ctrl.selectGenre(genre)"
+                ng-class="{ 'selected': ctrl.selectedGenre === genre }">
+                    {{ genre }}
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <md-content id="content" flex="70">
+            <md-input-container layout layout-margin flex>
+                <input type="text" ng-model="ctrl.searchText" placeholder="Movie Name" flex ng-change="ctrl.searchMovie()">
+                <md-icon>search</md-icon>
+            </md-input-container>
+            <div ng-show="ctrl.movie" layout="row" layout-margin>
+                <md-card flex="20" ng-click="ctrl.showDialog(ctrl.movie)">
+                    <img ng-src="{{ ctrl.movie.Poster }}" alt="Movie Poster">
+                    <div class="star-container">
+                        <md-icon ng-repeat="i in [1, 2, 3, 4, 5]" class="star-icon" ng-style="{ 'color': i <= ctrl.mapRating() ? 'red' : 'gray' }">
+                        star
+                        </md-icon>
+                    </div>
+                    <md-card-content>
+                        <p class="custom-font">Title: {{ ctrl.movie.Title }}</p>
+                        <p class="custom-font">Year: {{ ctrl.movie.Year }}</p>
+                        <p class="custom-font">Rated: {{ ctrl.movie.Rated }}</p>
+                        <p class="custom-font">Released: {{ ctrl.movie.Released }}</p>
+                        <p class="custom-font">Runtime: {{ ctrl.movie.Runtime }}</p>
+                    </md-card-content>
+
+                </md-card>
+            </div>
+        </md-content>
+    </div>
+    <script type="text/ng-template" id="Edit_Details.html">
+        <md-dialog aria-label="Edit Details">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="dialogCtrl.closeDialog()">
+                        <md-icon>close</md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content style="width: 300px;">
+                <div layout="column" layout-margin>
+                    <img ng-src="{{ dialogCtrl.selectedMovie.Poster }}" alt="Movie Poster" style="max-width: 100%; max-height: 300px; margin-bottom: 10px;">
+                    <div class="star-container">
+                        <md-icon ng-repeat="i in [1, 2, 3, 4, 5]"
+                            class="star-icon"
+                            ng-click="toggleStar(i)"
+                            ng-class="{ 'filled': i <= userRating, 'editable': i <= editableStars }">
+                            star
+                        </md-icon>
+                    </div>
+                    <md-input-container flex>
+                        <label>Year</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Year" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Genre</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Genre" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Director</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Director" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Actors</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Actors" type="text">
+                    </md-input-container>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button ng-click="dialogCtrl.resetChanges()">Reset</md-button>
+                <md-button ng-click="dialogCtrl.saveChanges()">Save</md-button>
+            </md-dialog-actions>            
+        </md-dialog>
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-app="movieSearch" layout="row" ng-controller="MovieController as ctrl">
+    <div ng-controller="ToggleList" layout="column" flex="">
+        <md-toolbar layout="row">
+            <div layout layout-align="center center">
+                <md-button class="menu" ng-click="toggleLeft();">
+                    <md-icon>
+                        menu
+                    </md-icon>
+                </md-button>
+                <div flex layout="row" layout-align="center center" flex>
+                    <h3>Genre</h3>
+                </div>
+            </div>
+        </md-toolbar>
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-sidenav-left" flex>
+            <md-list>
+                <md-list-item ng-class="{ 'selected': ctrl.selectedGenre === 'ALL' }">
+                        ALL
+                </md-list-item>
+                <md-list-item ng-repeat="genre in ctrl.genres" ng-click="ctrl.selectGenre(genre)"
+                ng-class="{ 'selected': ctrl.selectedGenre === genre }">
+                    {{ genre }}
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+    </div>
+    <div class="container" layout="column" flex="80">
+        <md-toolbar layout>
+            <div flex layout="row" layout-align="center center">
+                <h3>Movie Database</h3>
+            </div>
+        </md-toolbar>
+         <md-content id="content">
+            <md-input-container layout layout-margin> 
+                <input type="text" ng-model="ctrl.searchText" placeholder="Movie Name" ng-change="ctrl.searchMovie()">
+                <md-icon>search</md-icon>
+            </md-input-container>
+            <div ng-show="ctrl.movie" layout="row" layout-wrap layout-margin>
+                <md-card flex-gt-sm="20" flex-sm="40"  flex-lt-sm="30" ng-click="ctrl.showDialog(ctrl.movie)">
+                    <img ng-src="{{ ctrl.movie.Poster }}" alt="Movie Poster">
+                    <div class="star-container">
+                        <md-icon ng-repeat="i in [1, 2, 3, 4, 5]" class="star-icon" ng-style="{ 'color': i <= ctrl.mapRating() ? 'red' : 'gray' }">
+                        star
+                        </md-icon>
+                    </div>
+                    <md-card-content>
+                        <p class="custom-font">Title: {{ ctrl.movie.Title }}</p>
+                        <p class="custom-font">Year: {{ ctrl.movie.Year }}</p>
+                        <p class="custom-font">Rated: {{ ctrl.movie.Rated }}</p>
+                        <p class="custom-font">Released: {{ ctrl.movie.Released }}</p>
+                        <p class="custom-font">Runtime: {{ ctrl.movie.Runtime }}</p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-content>
+    </div>
+    <script type="text/ng-template" id="Edit_Details.html">
+        <md-dialog aria-label="Edit Details">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="dialogCtrl.closeDialog()">
+                        <md-icon>close</md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content style="width: 300px;">
+                <div layout="column" layout-margin>
+                    <img ng-src="{{ dialogCtrl.selectedMovie.Poster }}" alt="Movie Poster" style="max-width: 100%; max-height: 300px; margin-bottom: 10px;">
+                    <div class="star-container">
+                        <md-icon ng-repeat="i in [1, 2, 3, 4, 5]"
+                            class="star-icon"
+                            ng-click="toggleStar(i)"
+                            ng-class="{ 'filled': i <= userRating, 'editable': i <= editableStars }">
+                            star
+                        </md-icon>
+                    </div>
+                    <md-input-container flex>
+                        <label>Year</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Year" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Genre</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Genre" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Director</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Director" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Actors</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Actors" type="text">
+                    </md-input-container>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button ng-click="dialogCtrl.resetChanges()">Reset</md-button>
+                <md-button ng-click="dialogCtrl.saveChanges()">Save</md-button>
+            </md-dialog-actions>            
+        </md-dialog>
+    </script>
+</body>
+</html>
