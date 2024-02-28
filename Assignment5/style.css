@@ -21,3 +21,25 @@
 .movie-card{
     margin:20px 0 0 50px;
 }
+.star-container {
+    display: flex;
+}
+
+.star-icon {
+    cursor: pointer;
+    font-size: 24px; 
+    color: grey; 
+    padding: 0; 
+    margin:2px;
+}
+
+.star-icon.selected {
+    color: red; 
+}
+
+.md-button {
+    padding: 0; 
+}
+.selected {
+    color:blue ;
+}

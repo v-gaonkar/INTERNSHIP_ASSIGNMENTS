@@ -1,6 +1,7 @@
 angular.module('movieSearch.dialogController', [])
 .controller('DialogController', ['$mdDialog', '$scope', 'selectedMovie', function($mdDialog, $scope, selectedMovie) {
     var dialogCtrl = this;
+    
     dialogCtrl.selectedMovie = angular.copy(selectedMovie);
     var originalMovie = angular.copy(selectedMovie);
 
@@ -11,9 +12,14 @@ angular.module('movieSearch.dialogController', [])
     dialogCtrl.userRating = selectedMovie.rating;
 
     dialogCtrl.toggleStar = function (rating) {
-        dialogCtrl.userRating = rating;
+        var imdbRating = rating * 2;
+        dialogCtrl.selectedMovie.rating = rating;
+        for (var i = 1; i <= 5; i++) {
+            dialogCtrl['star' + i] = i <= rating; 
+        }
+        updateLocalStorage('imdbRating', imdbRating);
     };
-
+    
     dialogCtrl.saveChanges = function () {
         angular.forEach(dialogCtrl.selectedMovie, function (value, key) {
             if (value !== originalMovie[key]) {
@@ -27,14 +33,21 @@ angular.module('movieSearch.dialogController', [])
         $mdDialog.hide();
     };
 
-     dialogCtrl.mapRating = function () {
-    if (!dialogCtrl.selectedMovie || !dialogCtrl.selectedMovie.imdbRating) {
-        return 0;
-    }
+    dialogCtrl.mapRating = function () {
+        if (!dialogCtrl.selectedMovie || !dialogCtrl.selectedMovie.imdbRating) {
+            return 0;
+        }
 
-    var rating = parseFloat(dialogCtrl.selectedMovie.imdbRating);
-    return Math.round(rating / 2);
-};
+        var rating = parseFloat(dialogCtrl.selectedMovie.imdbRating);
+        return Math.round(rating / 2);
+    };
+
+    dialogCtrl.init = function() {
+        var rating = dialogCtrl.mapRating();
+        dialogCtrl.toggleStar(rating);
+    };
+
+    dialogCtrl.init();
 
     function updateLocalStorage(fieldName, fieldValue) {
         try {

@@ -49,6 +49,7 @@ angular.module('movieSearch.movieController', [])
                     console.log('Success! Response from API:', response.data);
                     if (response.data.Response === 'True') {
                         ctrl.movie = response.data;
+                        ctrl.movie.rating = 0;
                         localStorage.setItem('searchedMovie_' + ctrl.searchText, JSON.stringify(response.data));
                         ctrl.filteredMovies = [ctrl.movie];
                         if (ctrl.searchText) {
