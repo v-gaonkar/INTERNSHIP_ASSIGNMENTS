@@ -123,6 +123,7 @@ angular.module('movieSearch').constant('genreConst',{
         return Math.round(rating / 2);
     };
 
+    //dialoge 
     ctrl.showDialog = function (movie) {
         ctrl.selectedMovie = angular.copy(movie);
 

@@ -24,6 +24,7 @@
 }
 
 .star-icon {
+    cursor: pointer;
     font-size: 24px; 
     color: grey; 
     padding: 0; 
@@ -41,6 +42,14 @@
     color:blue ;
 }
 .rating{
-    margin:-10px;
     padding:0;
 }
+.left-section{
+    width:100%;
+    background: linear-gradient(to right, #4CAF50, #2196F3); 
+    color: white;
+   }
+   .login-card{
+    max-width: 350px;
+    width:100%;
+   }

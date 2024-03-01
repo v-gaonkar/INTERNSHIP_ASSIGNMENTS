@@ -13,10 +13,7 @@
     <script src="node_modules/angular-messages/angular-messages.min.js"></script>
     <script src="node_modules/angular-material/angular-material.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-    <script src="JS/app.js"></script>
     <script src="JS/MainController.js"></script>
-    <script src="JS/movieController.js"></script>
-    <script src="JS/toggleList.js"></script>
     <script src="JS/authentication.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -77,11 +74,12 @@
                     <img ng-src="{{ dialogCtrl.selectedMovie.Poster }}" alt="Movie Poster"
                         style="max-width: 100%; max-height: 300px; margin-bottom: 10px;">
                         <div class="star-container">
-                            <md-button class="md-icon-button" ng-repeat="i in [1, 2, 3, 4, 5]" ng-click="dialogCtrl.toggleStar(i)">
-                                <md-icon id="star-{{i}}" class="star-icon rating" ng-class="{ 'selected': dialogCtrl['star' + i] }">
-                                    star
-                                </md-icon>
-                            </md-button>
+                            <md-icon class="md-icon-button star-icon rating" id="star-{{i}}" 
+                             ng-repeat="i in [1, 2, 3, 4, 5]" 
+                             ng-click="dialogCtrl.toggleStar(i)"
+                             ng-class="{ 'selected': dialogCtrl['star' + i] }">
+                                star
+                        </md-icon>
                         </div>                                                                                    
                     <md-input-container flex>
                         <label>Year</label>
