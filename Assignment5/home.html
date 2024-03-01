@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="JS/app.js"></script>
+    <script src="JS/MainController.js"></script>
+    <script src="JS/movieController.js"></script>
+    <script src="JS/toggleList.js"></script>
+    <script src="JS/authentication.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-app="movieSearch" layout="column" ng-controller="MainController as ctrl">
+    <toolbar-component></toolbar-component>
+    <div class="container" layout="row" flex >
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" flex-sm="30" flex-gt-sm="20" flex-xs="30" md-whiteframe="4dp"
+         md-component-id="left" class="md-sidenav-left">
+            <md-list>
+                <md-list-item ng-repeat="genre in ctrl.genres" ng-click="ctrl.selectGenre(genre)"
+                    ng-class="{ 'selected': ctrl.selectedGenre === genre }">
+                    {{ genre }}
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <md-content id="content" flex>
+            <form ng-submit="ctrl.searchMovie()">
+                <md-input-container layout layout-margin flex>
+                    <input type="text" ng-model="ctrl.searchText" placeholder="Movie Name" flex id="searchInput">
+                    <md-icon>search</md-icon>
+                </md-input-container>
+            </form>
+            <div ng-show="ctrl.filteredMovies.length > 0" layout="row" layout-wrap> 
+                <md-card flex-gt-sm="20" flex-sm="30" flex-gt-xs="25" ng-repeat="movie in ctrl.filteredMovies"
+                    ng-click="ctrl.showDialog(movie)" class="movie-card">
+                    <img ng-src="{{ movie.Poster }}" alt="Movie Poster">
+                    <div class="star-container">
+                        <md-icon ng-repeat="i in [1, 2, 3, 4, 5]"
+                                 class="star-icon"
+                                 ng-class="{ 'selected': i <= ctrl.mapRating(movie) }">
+                            star
+                        </md-icon>
+                    </div>                    
+                    <md-card-content>
+                        <p class="custom-font">Title: {{ movie.Title }}</p>
+                        <p class="custom-font">Year: {{ movie.Year }}</p>
+                        <p class="custom-font">Rated: {{ movie.Rated }}</p>
+                        <p class="custom-font">Released: {{ movie.Released }}</p>
+                        <p class="custom-font">Runtime: {{ movie.Runtime }}</p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-content>
+    </div>
+    <script type="text/ng-template" id="Edit_Details.html">
+        <md-dialog aria-label="Edit Details">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="dialogCtrl.closeDialog()">
+                        <md-icon>close</md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content style="width: 300px;">
+                <div layout="column" layout-margin>
+                    <img ng-src="{{ dialogCtrl.selectedMovie.Poster }}" alt="Movie Poster"
+                        style="max-width: 100%; max-height: 300px; margin-bottom: 10px;">
+                        <div class="star-container">
+                            <md-button class="md-icon-button" ng-repeat="i in [1, 2, 3, 4, 5]" ng-click="dialogCtrl.toggleStar(i)">
+                                <md-icon id="star-{{i}}" class="star-icon rating" ng-class="{ 'selected': dialogCtrl['star' + i] }">
+                                    star
+                                </md-icon>
+                            </md-button>
+                        </div>                                                                                    
+                    <md-input-container flex>
+                        <label>Year</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Year" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Genre</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Genre" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Director</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Director" type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Actors</label>
+                        <input ng-model="dialogCtrl.selectedMovie.Actors" type="text">
+                    </md-input-container>
+                </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button ng-click="dialogCtrl.resetChanges()">Reset</md-button>
+                <md-button ng-click="dialogCtrl.saveChanges()">Save</md-button>
+            </md-dialog-actions>
+        </md-dialog>
+    </script>
+</body>
+
+</html>

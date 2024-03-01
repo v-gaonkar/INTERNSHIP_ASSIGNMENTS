@@ -1,0 +1,9 @@
+.left-section{
+    width:100%;
+    background: linear-gradient( right, #4CAF50, #2196F3); 
+    color: white;
+   }
+   .login-card{
+    max-width: 350px;
+    width:100%;
+   }
