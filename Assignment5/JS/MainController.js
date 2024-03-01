@@ -5,8 +5,8 @@ angular.module('movieSearch', ['ngMaterial', 'authentication', 'ui.router'])
         .state('home', {
             url: '/home',
             templateUrl: 'home.html',
-            controller: 'MainController', // Use 'MainController' instead of 'mainController'
-            controllerAs: 'ctrl' // Define controllerAs to avoid any conflict
+            controller: 'MainController', 
+            controllerAs: 'ctrl' 
         })
         .state('login', {
             url: '/login',
@@ -195,7 +195,7 @@ angular.module('movieSearch').constant('genreConst',{
             controllerAs: 'dialogCtrl',
             templateUrl: 'Edit_Details.html',
             parent: angular.element(document.body),
-            clickOutsideToClose: true
+            clickOutsideToClose: false
         });
-    };
+    }
 }]);
