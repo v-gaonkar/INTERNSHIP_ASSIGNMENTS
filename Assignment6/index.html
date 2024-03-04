@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Chat</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="app.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-app="chatApp" ng-controller="chatController as ctrl" layout="column">
+    <div flex="10" layout>
+        <md-toolbar layout-align="center center"><h3>Multi Chat</h3></md-toolbar>
+    </div>
+    <div flex="5" flex-gt-sm="5" flex-sm="5" flex-gt-xs="5" layout class="add-chat" layout-margin>
+        <md-button class="btn-color" ng-click="ctrl.addChatBox()"><span>ADD CHAT BOX</span></md-button>
+    </div>
+    <div layout="row" layout-wrap layout-align="start center">
+        <div class="chat-box" flex="30" flex-gt-sm="30" flex-sm="30" flex-gt-xs="50" flex-xs="60" layout="column" ng-repeat="chatBox in ctrl.chatBoxes track by $index">
+            <md-toolbar class="md-hue-2">
+                <div class="md-toolbar-tools">
+                    <h6>Chat Box {{ chatBox.id }}</h6>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Close" ng-click="ctrl.removeChatBox($index)">
+                        <md-icon>close</md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <div class="chat-content" flex>
+                <div ng-repeat="message in chatBox.messages">
+                    <div class="message-container" ng-class="{'sent': message.sent, 'received': !message.sent}">
+                        <div class="message-sender">{{ message.sender }}</div>
+                        <div class="message-content">{{ message.content }}</div>
+                    </div>
+                </div>
+            </div>                    
+            <md-divider></md-divider>
+            <form ng-submit="ctrl.sendMessage($index)" class="enter-text" flex="15" flex-gt-sm="15" flex-sm="15" flex-gt-xs="15">
+                <md-input-container layout-padding>
+                    <input ng-model="chatBox.message" type="text" placeholder="{{ chatBox.typing ? chatBox.typing : 'Enter Message' }}" ng-change="ctrl.toggleTypingStatus($index)">
+                </md-input-container>
+            </form>                                                                                     
+        </div>
+    </div>   
+</body>
+</html>
