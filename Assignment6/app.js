@@ -3,12 +3,11 @@ var app = angular.module('chatApp', ['ngMaterial']);
 app.controller('chatController', function($timeout) {
     var vm = this;
     vm.chatBoxes = [];
-    vm.maxLimit = 10;
-    vm.chatBoxIndex = 1; 
+    vm.boxIndex = 1; 
 
     vm.addChatBox = function() {
-        if (vm.chatBoxes.length < vm.maxLimit) {
-            var newIndex = vm.getNextAvailableIndex();
+        if (vm.chatBoxes.length < 10) {
+            var newIndex = getNextIndex();
             vm.chatBoxes.push({ id: newIndex, messages: [], typing: false });
         } else {
             alert('You can only add up to 10 chat boxes.');
@@ -24,38 +23,54 @@ app.controller('chatController', function($timeout) {
         if (chatBox && chatBox.message) {
             var newMessage = { sender: 'Chat Box ' + chatBox.id, content: chatBox.message, sent: true };
             chatBox.messages.push(newMessage);
-            for (var i = 0; i < vm.chatBoxes.length; i++) {
-                if (i !== index) {
-                    vm.chatBoxes[i].messages.push({ sender: 'Chat Box ' + chatBox.id, content: chatBox.message, sent: false });
-                }
-            }
+            sendMessageToBoxes(index, chatBox);
             chatBox.message = ''; 
         }
     };
 
-    vm.toggleTypingStatus = function(index) {
+    vm.typingStatus = function(index) {
         var currentChatBox = vm.chatBoxes[index];
         if (currentChatBox.message) {
-            for (var i = 0; i < vm.chatBoxes.length; i++) {
-                if (i !== index) {
-                    vm.chatBoxes[i].typing = 'Box ' + currentChatBox.id + ' is typing';
-                }
-            }
-           
-            $timeout(function() {
-                for (var i = 0; i < vm.chatBoxes.length; i++) {
-                    vm.chatBoxes[i].typing = false;
-                }
-            }, 2000); 
+            notifyTyping(index, currentChatBox);
+            resetTypingStatus();
         }
     };
 
-    
-    vm.getNextAvailableIndex = function() {
-        var nextIndex = vm.chatBoxIndex;
-        while (vm.chatBoxes.some(box => box.id === nextIndex)) {
+    function getNextIndex() {
+        var nextIndex = vm.boxIndex;
+        while (isInUse(nextIndex)) {
             nextIndex++;
         }
         return nextIndex;
-    };
+    }
+
+    function isInUse(index) {
+        return vm.chatBoxes.some(function(box) {
+            return box.id === index;
+        });
+    }
+
+    function sendMessageToBoxes(index, chatBox) {
+        for (var i = 0; i < vm.chatBoxes.length; i++) {
+            if (i !== index) {
+                vm.chatBoxes[i].messages.push({ sender: 'Chat Box ' + chatBox.id, content: chatBox.message, sent: false });
+            }
+        }
+    }
+
+    function notifyTyping(index, currentChatBox) {
+        for (var i = 0; i < vm.chatBoxes.length; i++) {
+            if (i !== index) {
+                vm.chatBoxes[i].typing = 'Box ' + currentChatBox.id + ' is typing';
+            }
+        }
+    }
+
+    function resetTypingStatus() {
+        $timeout(function() {
+            for (var i = 0; i < vm.chatBoxes.length; i++) {
+                vm.chatBoxes[i].typing = false;
+            }
+        }, 2000); 
+    }
 });
