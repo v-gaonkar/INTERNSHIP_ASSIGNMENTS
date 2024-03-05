@@ -10,7 +10,7 @@ app.controller('chatController', function($timeout) {
             var newIndex = getNextIndex();
             vm.chatBoxes.push({ id: newIndex, messages: [], typing: false });
         } else {
-            alert('You can only add up to 10 chat boxes.');
+            alert('Only 10 chat boxes can be added.');
         }
     };
 
@@ -27,7 +27,7 @@ app.controller('chatController', function($timeout) {
             return box.id === index;
         });
     }
-    
+
     vm.removeChatBox = function(index) {
         vm.chatBoxes.splice(index, 1);
     };
