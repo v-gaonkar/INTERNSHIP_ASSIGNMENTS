@@ -14,6 +14,20 @@ app.controller('chatController', function($timeout) {
         }
     };
 
+    function getNextIndex() {
+        var nextIndex = vm.boxIndex;
+        while (isInUse(nextIndex)) {
+            nextIndex++;
+        }
+        return nextIndex;
+    }
+
+    function isInUse(index) {
+        return vm.chatBoxes.some(function(box) {
+            return box.id === index;
+        });
+    }
+    
     vm.removeChatBox = function(index) {
         vm.chatBoxes.splice(index, 1);
     };
@@ -36,19 +50,6 @@ app.controller('chatController', function($timeout) {
         }
     };
 
-    function getNextIndex() {
-        var nextIndex = vm.boxIndex;
-        while (isInUse(nextIndex)) {
-            nextIndex++;
-        }
-        return nextIndex;
-    }
-
-    function isInUse(index) {
-        return vm.chatBoxes.some(function(box) {
-            return box.id === index;
-        });
-    }
 
     function sendMessageToBoxes(index, chatBox) {
         for (var i = 0; i < vm.chatBoxes.length; i++) {
@@ -71,6 +72,6 @@ app.controller('chatController', function($timeout) {
             for (var i = 0; i < vm.chatBoxes.length; i++) {
                 vm.chatBoxes[i].typing = false;
             }
-        }, 2000); 
+        }, 1000); 
     }
 });

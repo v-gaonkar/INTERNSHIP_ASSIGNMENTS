@@ -23,12 +23,12 @@
         <md-button class="btn-color" ng-click="ctrl.addChatBox()"><span>ADD CHAT BOX</span></md-button>
     </div>
     <div layout="row" layout-wrap layout-align="start center">
-        <div class="chat-box" flex="10" flex-gt-sm="30" flex-sm="30" flex-gt-xs="50" flex-xs="60" layout="column" ng-repeat="chatBox in ctrl.chatBoxes track by $index">
+        <div class="chat-box" flex="10" flex-gt-sm="30" flex-sm="30" flex-gt-xs="50" layout="column" ng-repeat="chatBox in ctrl.chatBoxes track by $index">
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h6>Chat Box {{ chatBox.id }}</h6>
                     <span flex></span>
-                    <md-button class="md-icon-button" aria-label="Close" ng-click="ctrl.removeChatBox($index)">
+                    <md-button aria-label="Close" ng-click="ctrl.removeChatBox($index)">
                         <md-icon>close</md-icon>
                     </md-button>
                 </div>
